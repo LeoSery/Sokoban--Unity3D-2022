@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 945736236323585358}
   - component: {fileID: 7086772021741661509}
   - component: {fileID: 6833113335172087107}
+  - component: {fileID: 4477033284123339744}
   m_Layer: 0
   m_Name: WoodCrate
   m_TagString: Box
@@ -146,3 +147,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed148cf7c6801e43880076b91c96f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4477033284123339744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5736243354882996526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f5e54c4028f6d42bbb9483b8332382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite1: {fileID: 21300000, guid: 7bc573d5fdb9a4e418d968f86becbe2f, type: 3}
+  sprite2: {fileID: 21300000, guid: 62a07191a4366e74aa7172c0fdec8259, type: 3}

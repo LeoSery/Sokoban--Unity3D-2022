@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7086772021741661509}
   - component: {fileID: 6833113335172087107}
   - component: {fileID: 4477033284123339744}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WoodCrate
   m_TagString: Box
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5736243354882996526}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -147,6 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed148cf7c6801e43880076b91c96f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 5
+  distanceToMove: 10
+  detectionDistance: 0.5
 --- !u!114 &4477033284123339744
 MonoBehaviour:
   m_ObjectHideFlags: 0

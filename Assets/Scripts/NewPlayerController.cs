@@ -1,33 +1,76 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class NewPlayerController : MonoBehaviour
 {
     public float movementSpeed;
     public float distanceToMove;
 
-    public bool moveToPoint = false;
     public float detectionDistance;
 
-    private Vector3 endPosition;
+    [HideInInspector]
+    public Vector3 targetPosition;
     
     private SpriteRenderer spriteRenderer;
     public Sprite[] spriteArr;
-    private int spriteIndex;
 
-    public BoxController boxController;
-    public UndoManager undoManager;
+    private BoxController boxController;
+    private UndoManager undoManager;
 
     void Start()
     {
-        endPosition = transform.position;
         undoManager = GameObject.Find("UndoManager").GetComponent<UndoManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        targetPosition = transform.position;
     }
 
     void Update()
     {
-        Movement();
+        if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            targetPosition = new Vector3(transform.position.x, transform.position.y + distanceToMove, transform.position.z);
+            ChangePlayerSprite(Vector3.up);
+            var crate = CheckCratePos(Vector3.up);
+            if (crate != null)
+                undoManager.Push(new List<GameObject>(new[] {crate, gameObject}), Vector3.up);
+            else
+                undoManager.Push(new List<GameObject>(new[] {gameObject}), Vector3.up);
+        }
+        else if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            targetPosition = new Vector3(transform.position.x - distanceToMove, transform.position.y, transform.position.z);
+            ChangePlayerSprite(Vector3.left);
+            var crate = CheckCratePos(Vector3.left);
+            if (crate != null)
+                undoManager.Push(new List<GameObject>(new[] {crate, gameObject}), Vector3.left);
+            else
+                undoManager.Push(new List<GameObject>(new[] {gameObject}), Vector3.left);
+        }
+        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            targetPosition = new Vector3(transform.position.x, transform.position.y - distanceToMove, transform.position.z);
+            ChangePlayerSprite(Vector3.down);
+            var crate = CheckCratePos(Vector3.down);
+            if (crate != null)
+                undoManager.Push(new List<GameObject>(new[] {crate, gameObject}), Vector3.down);
+            else
+                undoManager.Push(new List<GameObject>(new[] {gameObject}), Vector3.down);
+        }
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            targetPosition = new Vector3(transform.position.x + distanceToMove,transform.position.y, transform.position.z);
+            ChangePlayerSprite(Vector3.right);
+            var crate = CheckCratePos(Vector3.right);
+            if (crate != null)
+                undoManager.Push(new List<GameObject>(new[] {crate, gameObject}), Vector3.right);
+            else
+                undoManager.Push(new List<GameObject>(new[] {gameObject}), Vector3.right);
+        }
+
+        if (targetPosition != transform.position)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+        }
     }
 
     GameObject CheckCratePos(Vector3 direction)
@@ -43,70 +86,8 @@ public class PlayerController : MonoBehaviour
         return hit.collider?.gameObject;
     }
 
-    private void FixedUpdate()
-    {
-        ableToMove();
-    }
-
-    void ableToMove()
-    {
-        if (moveToPoint)
-        {
-            Debug.LogWarning("Moving to targer...");
-            transform.position = Vector3.MoveTowards(transform.position, endPosition, movementSpeed * Time.deltaTime);
-            moveToPoint = false;
-        }
-    }
-
-    void Movement()
-    {
-        if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            endPosition = new Vector3(endPosition.x, endPosition.y + distanceToMove, endPosition.z);
-            var crate = CheckCratePos(Vector3.up);
-            ChangePlayerSprite(Vector3.up);
-            if (crate != null)
-                undoManager.Push(new List<GameObject>(new[] {crate, gameObject}), Vector3.up);
-            else
-                undoManager.Push(new List<GameObject>(new[] {gameObject}), Vector3.up);
-        }
-        else if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            endPosition = new Vector3(endPosition.x - distanceToMove, endPosition.y, endPosition.z);
-             var crate = CheckCratePos(Vector3.left);
-             ChangePlayerSprite(Vector3.left);
-            if (crate != null)
-                undoManager.Push(new List<GameObject>(new[] {crate, gameObject}), Vector3.left);
-            else
-                undoManager.Push(new List<GameObject>(new[] {gameObject}), Vector3.left);
-        }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            endPosition = new Vector3(endPosition.x, endPosition.y - distanceToMove, endPosition.z);
-            var crate = CheckCratePos(Vector3.down);
-            ChangePlayerSprite(Vector3.down);
-            if (crate != null)
-                undoManager.Push(new List<GameObject>(new[] {crate, gameObject}), Vector3.down);
-            else
-                undoManager.Push(new List<GameObject>(new[] {gameObject}), Vector3.down);
-        }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            endPosition = new Vector3(endPosition.x + distanceToMove, endPosition.y, endPosition.z);
-            var crate = CheckCratePos(Vector3.right);
-            ChangePlayerSprite(Vector3.right);
-            if (crate != null)
-                undoManager.Push(new List<GameObject>(new[] {crate, gameObject}), Vector3.right);
-            else
-                undoManager.Push(new List<GameObject>(new[] {gameObject}), Vector3.right);
-        }
-        moveToPoint = true;
-    }
-
     void ChangePlayerSprite(Vector3 side)
     {
-        Vector3 currentSide = side;
-
         switch(side)
         {
             case Vector3 v when v.Equals(Vector3.up): 

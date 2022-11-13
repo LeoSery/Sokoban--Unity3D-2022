@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GoalDetector : MonoBehaviour
@@ -25,13 +23,24 @@ public class GoalDetector : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
         changeSprite();
+        LockCrate(collider, true);
     }
 
-    private void OnTriggerExit2D(Collider2D col)
+    private void OnTriggerExit2D(Collider2D collider)
     {
         changeSprite();
+        LockCrate(collider, false);
+    }
+
+    private void LockCrate(Collider2D crate, bool state)
+    {
+        if (state)
+            crate.transform.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        else
+            crate.transform.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            crate.transform.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }

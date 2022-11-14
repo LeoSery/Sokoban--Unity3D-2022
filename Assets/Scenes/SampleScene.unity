@@ -540,8 +540,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 250, y: 100}
+  m_AnchoredPosition: {x: 0.0000038146973, y: -30}
+  m_SizeDelta: {x: 150, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &339828505
 GameObject:
@@ -3491,6 +3491,7 @@ MonoBehaviour:
   - {fileID: 226107869}
   - {fileID: 194753798}
   - {fileID: 675983652}
+  Goals: 0
   winPanel: {fileID: 65133151}
 --- !u!1 &1038745751
 GameObject:
@@ -5395,7 +5396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9771a61cdda5c6b4996da3369e37165a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newPlayerController: {fileID: 0}
+  playerController: {fileID: 0}
 --- !u!1 &2050144640
 GameObject:
   m_ObjectHideFlags: 0
@@ -5465,7 +5466,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 150, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2079373351
 MonoBehaviour:
@@ -5516,7 +5517,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 50.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

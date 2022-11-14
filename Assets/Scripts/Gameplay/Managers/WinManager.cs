@@ -1,14 +1,19 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Win : MonoBehaviour
+public class WinManager : MonoBehaviour
 {
-    public static Win winScript;
+    [Header("Managers : ")]
+    public static WinManager winScript;
+
+    [Header("GameObjects : ")]
     public GameObject[] boxes;
-    private int Goals;
+
+    [Header("UI : ")]
     public GameObject winPanel;
+
     public HashSet<string> boxComplete;
+    private int Goals;
 
     private void Awake()
     {

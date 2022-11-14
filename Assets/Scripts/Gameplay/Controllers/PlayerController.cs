@@ -3,58 +3,67 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Script Settings :")]
     public float movementSpeed;
     public float distanceToMove;
-
     public float detectionDistance;
 
     [HideInInspector]
     public Vector3 targetPosition;
 
+    [Header("Sprites :")]
     private SpriteRenderer spriteRenderer;
     public Sprite[] spriteArr;
 
+    [Header("Scripts :")]
     private BoxController boxController;
+
+    [Header("Managers :")]
     private UndoManager undoManager;
+    private UIManager uiManager;
 
     void Start()
     {
         undoManager = GameObject.Find("UndoManager").GetComponent<UndoManager>();
+        uiManager = GameObject.Find("LevelManager").GetComponent<UIManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         targetPosition = transform.position;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (uiManager.gameIsPaused == false)
         {
-            targetPosition = new Vector3(transform.position.x, transform.position.y + distanceToMove, transform.position.z);
-            ChangePlayerSprite(Vector3.up);
-            var crate = CheckCratePos(Vector3.up);
-            SaveObjectsPos(crate, Vector3.up);
+            if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                targetPosition = new Vector3(transform.position.x, transform.position.y + distanceToMove, transform.position.z);
+                ChangePlayerSprite(Vector3.up);
+                var crate = CheckCratePos(Vector3.up);
+                SaveObjectsPos(crate, Vector3.up);
+            }
+            else if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                targetPosition = new Vector3(transform.position.x - distanceToMove, transform.position.y, transform.position.z);
+                ChangePlayerSprite(Vector3.left);
+                var crate = CheckCratePos(Vector3.left);
+                SaveObjectsPos(crate, Vector3.left);
+            }
+            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                targetPosition = new Vector3(transform.position.x, transform.position.y - distanceToMove, transform.position.z);
+                ChangePlayerSprite(Vector3.down);
+                var crate = CheckCratePos(Vector3.down);
+                SaveObjectsPos(crate, Vector3.down);
+            }
+            else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                targetPosition = new Vector3(transform.position.x + distanceToMove, transform.position.y, transform.position.z);
+                ChangePlayerSprite(Vector3.right);
+                var crate = CheckCratePos(Vector3.right);
+                SaveObjectsPos(crate, Vector3.right);
+            }
+            Move();
         }
-        else if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            targetPosition = new Vector3(transform.position.x - distanceToMove, transform.position.y, transform.position.z);
-            ChangePlayerSprite(Vector3.left);
-            var crate = CheckCratePos(Vector3.left);
-            SaveObjectsPos(crate, Vector3.left);
-        }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            targetPosition = new Vector3(transform.position.x, transform.position.y - distanceToMove, transform.position.z);
-            ChangePlayerSprite(Vector3.down);
-            var crate = CheckCratePos(Vector3.down);
-            SaveObjectsPos(crate, Vector3.down);
-        }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            targetPosition = new Vector3(transform.position.x + distanceToMove, transform.position.y, transform.position.z);
-            ChangePlayerSprite(Vector3.right);
-            var crate = CheckCratePos(Vector3.right);
-            SaveObjectsPos(crate, Vector3.right);
-        }
-        Move();
     }
 
     public void Move()

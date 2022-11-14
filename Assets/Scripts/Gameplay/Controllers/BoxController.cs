@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class BoxController : MonoBehaviour
 {
+    [Header("Script Settings :")]
     public float movementSpeed = 5f;
     public float distanceToMove = 50f;
-    public float detectionDistance;
-    
+    public float detectionDistance = 0.5f;
+
+    [Header("Scripts :")]
+    public PlayerController playerController;
+
     private Vector2 currentTarget;
+
+    void Awake()
+    {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
 
     public void CheckWallPos(Vector3 direction)
     {
-        RaycastHit2D hitWall = Physics2D.Raycast(transform.position, direction, detectionDistance, LayerMask.GetMask("Wall"));
+        RaycastHit2D hitWall = Physics2D.Raycast(transform.position + direction, direction, detectionDistance, LayerMask.GetMask("Wall"));
         RaycastHit2D hitOtherCrate = Physics2D.Raycast(transform.position + direction, direction, detectionDistance, LayerMask.GetMask("Cube"));
 
         if (hitWall.collider == null && hitOtherCrate.collider == null)
@@ -30,8 +39,8 @@ public class BoxController : MonoBehaviour
     {
         if (col.tag == "Goal")
         {
-            Win.winScript.boxComplete.Add(gameObject.name);
-            Win.winScript.CheckWin();
+            WinManager.winScript.boxComplete.Add(gameObject.name);
+            WinManager.winScript.CheckWin();
         }
     }
 }

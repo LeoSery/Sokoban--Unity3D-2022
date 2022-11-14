@@ -2,9 +2,17 @@ using UnityEngine;
 
 public class GoalDetector : MonoBehaviour
 {
+    [Header("Sprites : ")]
     public Sprite sprite1;
     public Sprite sprite2;
+
+    private UIManager uiManager;
     private SpriteRenderer spriteRenderer;
+
+    void Awake()
+    {
+        uiManager = GameObject.Find("LevelManager").GetComponent<UIManager>();
+    }
 
     private void Start()
     {
@@ -26,12 +34,16 @@ public class GoalDetector : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         changeSprite();
+        uiManager.nbCrates++;
+        uiManager.UpdateCrates();
         LockCrate(collider, true);
     }
 
     private void OnTriggerExit2D(Collider2D collider)
     {
         changeSprite();
+        uiManager.nbCrates--;
+        uiManager.UpdateCrates();
         LockCrate(collider, false);
     }
 

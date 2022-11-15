@@ -40,10 +40,28 @@ public class LevelManager : MonoBehaviour
         uiManager.UpdateUI(uiManager.levelText, currentLevel.ToString());
     }
 
+    public void Reload()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void StartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(1);
+    }
+
     public void LoadMainMenu()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void LoadOptions()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Options");
     }
 
     public void QuitGame()

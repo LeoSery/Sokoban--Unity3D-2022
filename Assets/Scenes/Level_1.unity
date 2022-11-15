@@ -299,6 +299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate_2
       objectReference: {fileID: 0}
+    - target: {fileID: 6833113335172087107, guid: 39059ea35a4498f40a37296edd6e76d9, type: 3}
+      propertyPath: detectionDistance
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 39059ea35a4498f40a37296edd6e76d9, type: 3}
@@ -5354,6 +5358,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate
       objectReference: {fileID: 0}
+    - target: {fileID: 6833113335172087107, guid: 39059ea35a4498f40a37296edd6e76d9, type: 3}
+      propertyPath: detectionDistance
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 39059ea35a4498f40a37296edd6e76d9, type: 3}
@@ -6512,6 +6520,10 @@ PrefabInstance:
     - target: {fileID: 5736243354882996526, guid: 39059ea35a4498f40a37296edd6e76d9, type: 3}
       propertyPath: m_Name
       value: Crate_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6833113335172087107, guid: 39059ea35a4498f40a37296edd6e76d9, type: 3}
+      propertyPath: detectionDistance
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
     GameObject CheckCratePos(Vector3 direction)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position + direction, direction, detectionDistance, LayerMask.GetMask("Cube"));
-        Debug.DrawRay(transform.position, transform.right, Color.green);
+        Debug.DrawRay(transform.position, transform.right, Color.green,2f);
 
         if (hit.collider != null)
         {

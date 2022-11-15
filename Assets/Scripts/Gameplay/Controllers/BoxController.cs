@@ -21,11 +21,17 @@ public class BoxController : MonoBehaviour
     {
         RaycastHit2D hitWall = Physics2D.Raycast(transform.position + direction, direction, detectionDistance, LayerMask.GetMask("Wall"));
         RaycastHit2D hitOtherCrate = Physics2D.Raycast(transform.position + direction, direction, detectionDistance, LayerMask.GetMask("Cube"));
+        Debug.DrawRay(transform.position, direction, Color.red, 2f);
 
         if (hitWall.collider == null && hitOtherCrate.collider == null)
         {
             MoveCrate(direction);
         }
+        if (hitWall.collider == null)
+        {
+            Debug.Log("No Wall Detected");
+        }
+        if (hitOtherCrate.collider == null) Debug.Log("No Crate detected");
     }
 
     public void MoveCrate(Vector3 direction)

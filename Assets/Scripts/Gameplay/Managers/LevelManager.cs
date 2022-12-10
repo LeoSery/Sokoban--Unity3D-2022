@@ -66,9 +66,9 @@ public class LevelManager : MonoBehaviour
 
     public void QuitGame()
     {
-        #if UNITY_EDITOR
-            Debug.LogWarning("Closing the game...");
-        #endif
+#if UNITY_EDITOR
+        Debug.LogWarning("Closing the game...");
+#endif
         Time.timeScale = 1f;
         Application.Quit();
     }

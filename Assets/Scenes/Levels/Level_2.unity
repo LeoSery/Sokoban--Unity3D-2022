@@ -363,6 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 0
+  nextLevelButton: {fileID: 952373108}
 --- !u!114 &116882313
 MonoBehaviour:
   m_ObjectHideFlags: 0

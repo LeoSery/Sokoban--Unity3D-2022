@@ -1,10 +1,17 @@
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
     [Header("Script Settings :")]
     public int currentLevel = 0;
+
+    [Header("GameObjects :")]
+    public GameObject nextLevelButton;
+
+    private readonly int levelCount = 2;
 
     private UIManager uiManager;
 
@@ -12,6 +19,17 @@ public class LevelManager : MonoBehaviour
     {
         uiManager = GetComponent<UIManager>();
         currentLevel = GetCurrentLevel();
+
+        if (currentLevel < levelCount)
+        {
+            nextLevelButton.GetComponent<Button>().interactable = true;
+            nextLevelButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color32(255, 255, 255, 255);
+        }
+        else
+        {
+            nextLevelButton.GetComponent<Button>().interactable = false;
+            nextLevelButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color32(144, 135, 135, 158);
+        }
     }
 
     int GetCurrentLevel()
@@ -28,8 +46,8 @@ public class LevelManager : MonoBehaviour
 
     public void NextLevel()
     {
+        currentLevel = GetCurrentLevel();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        currentLevel = SceneManager.GetActiveScene().buildIndex;
         uiManager.UpdateUI(uiManager.levelText, currentLevel.ToString());
     }
 

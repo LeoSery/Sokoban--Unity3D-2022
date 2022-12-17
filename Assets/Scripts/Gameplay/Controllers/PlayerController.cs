@@ -12,13 +12,12 @@ public class PlayerController : MonoBehaviour
     public Vector3 targetPosition;
 
     [Header("Sprites :")]
-    private SpriteRenderer spriteRenderer;
     public Sprite[] spriteArr;
 
-    [Header("Scripts :")]
+    private SpriteRenderer spriteRenderer;
+
     private BoxController boxController;
 
-    [Header("Managers :")]
     private UndoManager undoManager;
     private UIManager uiManager;
 
@@ -85,7 +84,7 @@ public class PlayerController : MonoBehaviour
     GameObject CheckCratePos(Vector3 direction)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position + direction, direction, detectionDistance, LayerMask.GetMask("Cube"));
-        Debug.DrawRay(transform.position, transform.right, Color.green,2f);
+        Debug.DrawRay(transform.position, transform.right, Color.green, 2f);
 
         if (hit.collider != null)
         {
